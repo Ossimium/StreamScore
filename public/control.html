@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Punkte-Kontrolle</title>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+</head>
+<body>
+    <h1>Punkte-Kontrolle</h1>
+
+    <form>
+        <label for="punkte_heim">Heim-Punkte:</label>
+        <p><span id="punkte_heim">0</span></p>
+        <button type="button" onclick="erhoeheHeimPunkte()">+</button>
+        <button type="button" onclick="verringereHeimPunkte()">-</button>
+    </br>
+    </br>
+
+        <label for="satz_heim">Heim-Sätze:</label>
+        <p><span id="satz_heim">0</span></p>
+        <button type="button" onclick="erhoeheHeimSatz()">+</button>
+        <button type="button" onclick="verringereHeimSatz()">-</button>
+    </br>
+    </br>
+        <label for="punkte_gast">Gast-Punkte:</label>
+        <p><span id="punkte_gast">0</span></p>
+        <button type="button" onclick="erhoeheGastPunkte()">+</button>
+        <button type="button" onclick="verringereGastPunkte()">-</button>
+    </br>
+    </br>
+        <label for="satz_gast">Gast-Sätze:</label>
+        <p><span id="satz_gast">0</span></p>
+        <button type="button" onclick="erhoeheGastSatz()">+</button>
+        <button type="button" onclick="verringereGastSatz()">-</button>
+
+        </form>
+
+    <script>
+        const socket = io();
+
+        socket.on('updateScores', (data) => {
+        document.getElementById('punkte_heim').textContent = data.punkte_heim;
+        document.getElementById('punkte_gast').textContent = data.punkte_gast;
+        document.getElementById('satz_heim').textContent = data.satz_heim;
+        document.getElementById('satz_gast').textContent = data.satz_gast;
+        });
+        function erhoeheHeimPunkte() {
+            // Sende ein Event an den Server, um die Heim-Punkte zu erhöhen
+            socket.emit('updatePunkte', { team: 'heim', type: 'punkte', operation: 'erhoehe' });
+            
+        }
+        function verringereHeimPunkte() {
+            // Sende ein Event an den Server, um die Heim-Punkte zu verringern
+            socket.emit('updatePunkte', { team: 'heim', type: 'punkte', operation: 'verringern' });
+        }
+        function erhoeheGastPunkte() {
+            // Sende ein Event an den Server, um die Gast-Punkte zu erhöhen
+            socket.emit('updatePunkte', { team: 'gast', type: 'punkte', operation: 'erhoehe' });
+        }
+        function verringereGastPunkte() {
+            // Sende ein Event an den Server, um die Gast-Punkte zu verringern
+            socket.emit('updatePunkte', { team: 'gast', type: 'punkte', operation: 'verringern' });
+        }
+
+        function erhoeheHeimSatz() {
+            // Sende ein Event an den Server, um die Heim-Satz zu erhöhen
+            socket.emit('updatePunkte', { team: 'heim', type: 'satz', operation: 'erhoehe' });
+        }
+        function verringereHeimSatz() {
+            // Sende ein Event an den Server, um die Heim-Satz zu verringern
+            socket.emit('updatePunkte', { team: 'heim', type: 'satz', operation: 'verringern' });
+        }
+        function erhoeheGastSatz() {
+            // Sende ein Event an den Server, um die Gast-Satz zu erhöhen
+            socket.emit('updatePunkte', { team: 'gast', type: 'satz', operation: 'erhoehe' });
+        }
+        function verringereGastSatz() {
+            // Sende ein Event an den Server, um die Gast-Satz zu verringern
+            socket.emit('updatePunkte', { team: 'gast', type: 'satz', operation: 'verringern' });
+        }
+    </script>
+</body>
+</html>
