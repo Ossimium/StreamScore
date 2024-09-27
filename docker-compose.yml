@@ -6,7 +6,7 @@ services:
       context: ./server
       dockerfile: dockerfile
     container_name: localhost
-    env_file: .env_file
+    env_file: .env
     ports:
       - 3000:3000
   nginx:
