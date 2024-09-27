@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  server:
+    image: node
+    build: 
+      context: ./server
+      dockerfile: dockerfile
+    container_name: localhost
+    env_file: .env_file
+    ports:
+      - 3000:3000
+  nginx:
+    image: nginx
+    restart: always
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: ${NGINX_HOST}
+    env_file: .env
+    ports:
+      - ${NGINX_PORT}:${NGINX_PORT}
