@@ -18,3 +18,13 @@ services:
       env_file: .env
       ports:
         - ${NGINX_PORT}:${NGINX_PORT}
+      volumes:
+        - ./certbot/conf:/etc/letsencrypt
+        - ./certbot/www:/var/www/certbot
+    certbot:
+      image: certbot/certbot
+      container_name: certbot
+      volumes:
+        - ./certbot/conf:/etc/letsencrypt
+        - ./vertbot/www:/var/www/certbot
+      command: certonly --webroot -w /var/www/certbot --force-renewal --email oskar.wolny@gmail.com -d vsv-score.de --agree-tos
