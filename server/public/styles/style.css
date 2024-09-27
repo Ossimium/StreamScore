@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Score';
-    src: url(MeineSchrift.otf);
+    src: url('/MeineSchrift.otf');
 }
 
 p {
