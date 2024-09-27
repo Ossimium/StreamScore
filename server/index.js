@@ -2,8 +2,6 @@ const express = require('express');
 const { Server } = require('socket.io');
 const path = require('path');
 
-const port = 3000;
-
 const http = require('http');
 const app = express();
 
@@ -123,6 +121,6 @@ function check_score(){
         
 }
 
-server.listen(port, () => {
-    console.log(`Server listening on port ${port}`);
+server.listen(3000, () => {
+    console.log(`Server listening on port 3000`);
 });
