@@ -1,18 +1,20 @@
 services:
-  server:
-    image: node
-    build: 
-      context: ./server
-      dockerfile: dockerfile
-    container_name: node-c
-    ports:
-      - 3000:3000
-  nginx:
-    image: nginx
-    restart: always
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
-    container_name: nginx-c
-    ports:
-      - 8080:8080
+    server:
+        image: server
+        build:
+            context: ./server
+            dockerfile: Dockerfile
+        container_name: ${SERVER_HOST}
+        env_file: .env
+        ports:
+            - ${SERVER_PORT}:${SERVER_PORT}
+    nginx:
+      image: reverse-proxy
+      restart: always
+      build: 
+        context: ./nginx
+        dockerfile: Dockerfile
+      container_name: ${NGINX_HOST}
+      env_file: .env
+      ports:
+        - ${NGINX_PORT}:${NGINX_PORT}
