@@ -6,12 +6,12 @@ const http = require('http');
 const app = express();
 
 // Statische Dateien aus dem 'public' Ordner servieren
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static('public'));
 
 // Route für die Startseite (optional)
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'control.html'));
-});
+// app.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, '/public', 'control.html'));
+// });
 
 const server = http.createServer(app);
 

@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'Score';
+    src: url(Merich.otf);
+}
+
+p {
+    font-size: 4em;
+    color: white;
+    font-family: 'Score', sans-serif 
+}
